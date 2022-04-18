@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" type="text/css" href = "ExchangeRates.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">    
+    <title>Document</title>
+</head>
+<header>
+    <div class="center">
+        <img src="./Exchange_logo.png">
+        <div class="container">
+            <h1>Exchange Rates</h1>
+        </div>
+    </div>
+</header>
+<body>
+
+    <table class="table_content">
+        <tr>
+            <thead>
+            <th>Name</th>
+            <th>Short name</th>
+            <th>Country</th>
+            <th>Valid from</th>
+            <th>Amount</th>
+            <th>Buy value</th>
+            <th>Sell value</th>
+            <th>Mid value</th>
+            <th>Current buy</th>
+            <th>Current sell</th>
+            <th>Current mid</th>
+            <th>Move</th>
+            <th>CNB mid</th>
+            <th>Version</th>
+        </thead>
+        </tr>
+        <tbody id="main">
+        </tbody>
+    </table>
+
+    <script>
+
+        getRates();
+
+        async function getRates(){
+            const response = await fetch('https://webapi.developers.erstegroup.com/api/csas/public/sandbox/v2/rates/exchangerates?web-api-key=c52a0682-4806-4903-828f-6cc66508329e');
+            const data = await response.json();
+
+            var div = document.getElementById('main');
+            div.innerHTML = "";
+            var tr="";
+            data.forEach(x => {
+                tr+='<tr>'+'<td>' + x.name+ '</td>' + '<td>' + x.shortName + '</td>' + '<td>' + x.country + '</td>' +'<td>' + x.validFrom + '</td>' +'<td>' + x.amount + '</td>' +'<td>' + x.valBuy + '</td>' +'<td>' + x.valSell + '</td>' +'<td>' + x.valMid + '</td>' +'<td>' + x.currBuy + '</td>' +'<td>' + x.currSell + '</td>' +'<td>' + x.currMid + '</td>' +'<td>' + x.move + '</td>' +'<td>' + x.cnbMid + '</td>' +'<td>' + x.version + '</td>'+'</tr>';
+            });
+            div.innerHTML = tr;
+        }
+
+        
+
+    </script>
+</body>
+</html>
